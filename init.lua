@@ -29,9 +29,9 @@ function table.random( t )
 end
 
 function random_messages.initialize() --Set the interval in minetest.conf.
-	minetest.settings:set("random_messages_interval",120)
+	minetest.settings:set("random_messages_interval",80)
 	minetest.settings:save();
-	return 120
+	return 80
 end
 
 function random_messages.set_interval() --Read the interval from minetest.conf(set it if it doesn'st exist)
@@ -76,7 +76,7 @@ function random_messages.read_messages()
 	end
 	io.close(input)
 end
-
+--[[
 function random_messages.display_message(message_number)
 	local msg = random_messages.messages[message_number] or message_number
 	if msg then
@@ -87,6 +87,27 @@ end
 function random_messages.show_message()
 	random_messages.display_message(table.random(random_messages.messages))
 end
+]]
+
+--=======
+--BEERHOLDER CODE HERE
+function random_messages.display_message(message_number)
+	local msg = random_messages.messages[message_number] or message_number
+	if msg then
+--		minetest.chat_send_all(msg)
+		for _,player in ipairs(minetest.get_connected_players()) do
+			local target = player:get_player_name()
+					minetest.chat_send_player(target, string.char(0x1b).."(c@#22ddff)"..
+													  string.format("[<%s>] %s", "ESM TIP", msg))	
+		end
+	end
+end
+
+function random_messages.show_message()
+	local msg = string.char(0x1b).."(c@#00ffbb)"..table.random(random_messages.messages)
+	random_messages.display_message(msg)
+end
+--=======
 
 function random_messages.list_messages()
 	local str = ""
