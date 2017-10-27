@@ -6,7 +6,7 @@ arsdragonfly@gmail.com
 --Time between two subsequent messages.
 local MESSAGE_INTERVAL = 0
 -- Added default messages file
-local default_messages_file = "default_random_messages"
+local default_messages_file = "random_messages"
 
 math.randomseed(os.time())
 
