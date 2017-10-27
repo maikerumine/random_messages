@@ -54,7 +54,7 @@ function random_messages.read_messages()
 	-- no input file found
 	if not input then
 		-- look for default file
-		local default_input = io.open(minetest.get_modpath("random_messages").."/"..random_messages,"r")
+		local default_input = io.open(minetest.get_modpath("random_messages").."/"..default_messages_file,"r")
 		local output = io.open(minetest.get_worldpath().."/random_messages","w")
 		if not default_input then
 			-- blame the admin if not found
